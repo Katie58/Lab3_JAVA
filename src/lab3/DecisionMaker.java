@@ -3,31 +3,31 @@ import java.util.Scanner;
 
 public class DecisionMaker {
 	static Scanner scnr = new Scanner(System.in);
-
+	static String name = name();
 	public static void main(String[] args) {
 		boolean retry = true;
-		String name = Name();
 		
-		Header(name);
+		
+		header();
 		while (retry) {
-			Range(UserInt(name), name);
+			range(userInt());
 			
-			retry = Continue();
+			retry = retry();
 		}
-		Exit(name);
+		exit();
 		scnr.close();
 	}
 	
-	public static String Name() {
+	public static String name() {
 		System.out.println("Please enter your name: ");
 		return scnr.nextLine();		
 	}
 
-	public static void Header(String name) {
+	public static void header() {
 		System.out.println("Welcome " + name + ", to the Automated Decision-Maker\n");
 	}
 	
-	public static int UserInt(String name) {
+	public static int userInt() {
 		boolean valid = false;
 		int input = 0;
 		while (!valid) {
@@ -43,7 +43,7 @@ public class DecisionMaker {
 		return input;
 	}
 	
-	public static void Range(int input, String name) {
+	public static void range(int input) {
 		if ((input % 2) == 1) {
 			System.out.print(input + " is Odd");
 			if (input > 60) {
@@ -67,7 +67,7 @@ public class DecisionMaker {
 		}
 	}
 	
-	public static boolean Continue() {
+	public static boolean retry() {
 		char cont = ' ';
 		while(cont != 'y' && cont != 'Y' && cont != 'n' && cont != 'N') {
 		System.out.println("Continue? (y/n) ");
@@ -82,7 +82,7 @@ public class DecisionMaker {
 		}
 	}
 	
-	public static void Exit(String name) {
+	public static void exit() {
 		System.out.println("GOODBYE " + name + "!");
 	}
 }
