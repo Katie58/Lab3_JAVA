@@ -4,14 +4,16 @@ import java.util.Scanner;
 public class DecisionMaker {
 	static Scanner scnr = new Scanner(System.in);
 	static String name = name();
+	static int input;
+	
 	public static void main(String[] args) {
 		boolean retry = true;
 		
-		
 		header();
 		while (retry) {
-			range(userInt());
-			
+			userInt();
+			range();
+			System.out.println(input);//testing
 			retry = retry();
 		}
 		exit();
@@ -27,23 +29,42 @@ public class DecisionMaker {
 		System.out.println("Welcome " + name + ", to the Automated Decision-Maker\n");
 	}
 	
-	public static int userInt() {
+	public static void userInt() {
 		boolean valid = false;
-		int input = 0;
+		String inputString;
 		while (!valid) {
 			System.out.print("Please input an integer between 1 and 100: ");
-			input = scnr.nextInt();
+			inputString = scnr.nextLine();
+			valid = tryParseInt(inputString);
+		}
+	}
+	
+	public static boolean tryParseInt(String inputString) {
+		boolean valid = true;
+		for (int i = 0; i < inputString.length(); i++) {
+			int x = inputString.charAt(i);
+			if (!(x >= 48 && x <= 57)) {
+				valid = false;
+				break;
+			}
+		}
+		if (valid) {
+			input = Integer.parseInt(inputString);
 			if ((input > 0) && (input < 100)) {
-				valid = true;
+				return true;
 			}
 			else {
 				System.out.println(name + ", please read the directions and try again...");
+				return false;
 			}
 		}
-		return input;
+		else {
+			System.out.println(name + ", please read the directions and try again...");
+			return false;
+		}
 	}
 	
-	public static void range(int input) {
+	public static void range() {
 		if ((input % 2) == 1) {
 			System.out.print(input + " is Odd");
 			if (input > 60) {
@@ -69,11 +90,12 @@ public class DecisionMaker {
 	
 	public static boolean retry() {
 		char cont = ' ';
+		System.out.print("Continue? (y/n) ");
+		cont = scnr.nextLine().charAt(0);
 		while(cont != 'y' && cont != 'Y' && cont != 'n' && cont != 'N') {
-		System.out.println("Continue? (y/n) ");
-		cont = scnr.next().charAt(0);
-		}
-		
+		System.out.println(name + ", what was that?... type 'y' to continue or 'n' to exit");
+		cont = scnr.nextLine().charAt(0);
+		}		
 		if (cont == 'y' || cont == 'Y') {
 			return true;
 		}
