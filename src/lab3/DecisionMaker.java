@@ -49,7 +49,7 @@ public class DecisionMaker {
 		}
 		if (valid) {
 			input = Integer.parseInt(inputString);
-			if ((input > 0) && (input < 100)) {
+			if ((input > 0) && (input <= 100)) {
 				return true;
 			}
 			else {
@@ -79,7 +79,7 @@ public class DecisionMaker {
 				System.out.println("Even");
 			}
 			else if (input > 60) {
-				System.out.println(input + "Even");
+				System.out.println(input + " Even");
 			}
 			else {
 				System.out.println("Sorry " + name + ", I am not programmed to provide a response to that input.");
