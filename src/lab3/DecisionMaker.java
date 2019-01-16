@@ -13,7 +13,6 @@ public class DecisionMaker {
 		while (retry) {
 			userInt();
 			range();
-			System.out.println(input);//testing
 			retry = retry();
 		}
 		exit();
